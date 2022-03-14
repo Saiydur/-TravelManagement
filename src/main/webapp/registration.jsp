@@ -8,15 +8,16 @@
 <%@include file="partial/header.jsp"%>
 <%--Registration Section--%>
 <section class="container">
-  <p class="alert alert-success" role="alert">
+
     <%
       if (request.getSession().getAttribute("success")!=null)
       {
+        out.println("<p class=\"alert alert-success\" role=\"alert\">");
         String message = request.getSession().getAttribute("success").toString();
         out.println(message);
+        out.println("</p>");
       }
     %>
-  </p>
   <form method="post" novalidate action="registration">
     <fieldset>
       <legend>

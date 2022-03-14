@@ -6,15 +6,17 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@include file="partial/header.jsp"%>
-<p class="alert alert-success" role="alert">
+
     <%
         if (request.getSession().getAttribute("userid")!=null)
         {
+            out.println("<p class=\"alert alert-success\" role=\"alert\">");
             String message = request.getSession().getAttribute("userid").toString();
             out.println(message);
+            out.println("</p>");
         }
     %>
-</p>
+
 <section class="container">
     <form method="post" novalidate action="login" autocomplete="off">
         <fieldset>
