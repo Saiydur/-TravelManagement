@@ -17,6 +17,7 @@ public class AboutusServlet extends HttpServlet {
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/aboutus.jsp");
         requestDispatcher.forward(request,response);
     }

@@ -59,6 +59,54 @@ public class UserServices {
                 person.put(true,resultSet.getInt("id"));
             }
         }
+        this.connection.close();
+        this.preparedStatement.close();
         return person;
+    }
+
+    public ResultSet getUserAllInfo(int userId) throws SQLException {
+        String sql = "SELECT * FROM USER WHERE id = ?";
+        this.preparedStatement=connection.prepareStatement(sql);
+        this.preparedStatement.setInt(1,userId);
+        ResultSet resultSet = this.preparedStatement.executeQuery();
+        return resultSet;
+    }
+
+    public boolean updateUserPassword(int userId,String password) throws SQLException{
+        String sql = "UPDATE user SET password = ? WHERE id = ?";
+        this.preparedStatement=connection.prepareStatement(sql);
+        this.preparedStatement.setString(1,password);
+        this.preparedStatement.setInt(2,userId);
+        int response = preparedStatement.executeUpdate();
+        if (response==1){
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public boolean updateUserInfo(int userId,UserModel userModel) throws SQLException {
+        String sql = "UPDATE user SET " +
+                "first_name = ? ," +
+                "last_name = ? ," +
+                "email = ? ," +
+                "phone_number = ? " +
+                "WHERE id = ?";
+        this.preparedStatement=connection.prepareStatement(sql);
+        this.preparedStatement.setString(1,userModel.getFirstName());
+        this.preparedStatement.setString(2,userModel.getLastName());
+        this.preparedStatement.setString(3,userModel.getEmail());
+        this.preparedStatement.setString(4,userModel.getPhoneNumber());
+        this.preparedStatement.setInt(5,userId);
+        int response = preparedStatement.executeUpdate();
+        if (response==1){
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

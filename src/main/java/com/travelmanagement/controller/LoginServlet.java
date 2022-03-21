@@ -5,7 +5,6 @@ import com.travelmanagement.model.UserServices;
 
 import java.io.*;
 import java.sql.*;
-import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.RequestDispatcher;
@@ -25,6 +24,7 @@ public class LoginServlet extends HttpServlet {
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/login.jsp");
         requestDispatcher.forward(request,response);
     }
@@ -39,10 +39,13 @@ public class LoginServlet extends HttpServlet {
                 for (Integer key : person.values()){
                     HttpSession session = request.getSession();
                     session.setAttribute("userid",key);
-
-                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/login.jsp");
-                    requestDispatcher.forward(request,response);
+                    response.sendRedirect("dashboard");
                 }
+            }
+            else {
+                request.setAttribute("login","Check username or password");
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/login.jsp");
+                requestDispatcher.forward(request,response);
             }
         } catch (SQLException e) {
             e.printStackTrace();

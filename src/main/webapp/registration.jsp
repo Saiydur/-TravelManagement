@@ -9,6 +9,13 @@
 <%--Registration Section--%>
 <section class="container">
 
+  <%
+    if (request.getSession().getAttribute("userid")!=null)
+    {
+      response.sendRedirect("dashboard");
+    }
+  %>
+
     <%
       if (request.getSession().getAttribute("success")!=null)
       {
